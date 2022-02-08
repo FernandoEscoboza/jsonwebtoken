@@ -1,0 +1,22 @@
+<p>user works!</p>
+
+<!-- <h1>{{userlist}}</h1> -->
+
+<!-- <tr *ngFor="let user of userlist">
+    <td>{{ user.user }}</td>
+</tr> -->
+<!-- <li *ngFor="let user of userlist">User: {{user.user}}</li> -->
+
+
+
+
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">User Name</label>
+    <input [(ngModel)]="users.user" type="email" class="form-control"  placeholder="name@example.com">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Password</label>
+    <input [(ngModel)]="users.password" type="password" class="form-control"  placeholder="name@example.com">
+   </div>
+  <!-- <input type="submit" value="Login" (click)="login()" class="btn btn-primary"> -->
+  <button class="btn btn-primary" (click)="login()">Login</button>

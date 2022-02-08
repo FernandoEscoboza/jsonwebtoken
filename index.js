@@ -5,26 +5,24 @@ const jwt = require('jsonwebtoken');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
 
 const conn = require('./connection');
 
 // Configuracion de servidor
-app.use(express.urlencoded({ extended: true }))
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(cors());
+app.use(morgan('dev'));
 
 // Configuracion de rutas
 app.get('/api', (req, res) =>{
     conn.query('select * from user', (err, result )=>{
-        if(!err){
-            res.json({
-                result: result
-            });
-        } else{
-            console.log(err);
-        }
+        if( err) throw err;
+        res.status(200).json(result);
+        
     });
-})
+});
 
 app.post('/api/login', (req, res) => {
     const {user,  password } = req.body;
@@ -34,7 +32,7 @@ app.post('/api/login', (req, res) => {
             let data = JSON.stringify(rows[0]);
             const token = jwt.sign(data, 'my_secret');
             res.json({
-                token:token
+                token
                 // rows: rows
             })
         }else{
